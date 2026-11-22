@@ -12,9 +12,9 @@ const players = [
 
 // Four traditional safe-zone positions
 const safeStars = new Set([
+    "6,11",
     "2,6",
-    "6,12",
-    "12,8",
+    "12,6",
     "8,2"
 ]);
 
