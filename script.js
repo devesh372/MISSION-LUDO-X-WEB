@@ -12,10 +12,10 @@ const players = [
 
 // Four traditional safe-zone positions
 const safeStars = new Set([
-    "6,2",
-    "2,8",
-    "8,12",
-    "12,6"
+    "2,6",
+    "6,12",
+    "12,8",
+    "8,2"
 ]);
 
 function getHome(row, col) {
