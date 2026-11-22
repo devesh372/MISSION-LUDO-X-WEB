@@ -14,7 +14,7 @@ const players = [
 const safeStars = new Set([
     "6,11",
     "2,6",
-    "12,6",
+    "12,8",
     "8,2"
 ]);
 
