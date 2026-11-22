@@ -10,6 +10,14 @@ const players = [
     { name: "yellow", row: 9, col: 0 }
 ];
 
+// Four traditional safe-zone positions
+const safeStars = new Set([
+    "6,2",
+    "2,8",
+    "8,12",
+    "12,6"
+]);
+
 function getHome(row, col) {
     return players.find(player =>
         row >= player.row &&
@@ -115,11 +123,19 @@ function createBoard() {
                 cell.classList.add("empty");
             }
 
+            // Add safe-zone stars
+            if (safeStars.has(`${row},${col}`)) {
+                const star = document.createElement("span");
+                star.className = "safe-star";
+                star.textContent = "☆";
+                cell.appendChild(star);
+            }
+
             board.appendChild(cell);
         }
     }
 
-    console.log("MISSION LUDO X board created!");
+    console.log("MISSION LUDO X board created with four safe stars!");
 }
 
 createBoard();
