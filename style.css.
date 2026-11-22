@@ -1,0 +1,75 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(
+        circle at center,
+        #263b65,
+        #10182b 75%
+    );
+    font-family: Arial, sans-serif;
+    color: white;
+    overflow-x: hidden;
+}
+
+#game {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 10px;
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.game-header h1 {
+    font-size: clamp(25px, 6vw, 40px);
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #ffd54a;
+    text-shadow: 0 3px 12px #0008;
+}
+
+.game-header p {
+    margin-top: 7px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #c4d5ff;
+}
+
+#game-screen {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#ludo-board {
+    width: min(94vw, 620px);
+    aspect-ratio: 1 / 1;
+    background: white;
+    border: 5px solid #d9e0ed;
+    border-radius: 5px;
+    box-shadow:
+        0 15px 45px #0008,
+        0 0 25px #8db7ff55;
+    overflow: hidden;
+}
+
+@media (max-width: 400px) {
+    #game {
+        padding: 12px 5px;
+    }
+
+    .game-header {
+        margin-bottom: 15px;
+    }
+}
