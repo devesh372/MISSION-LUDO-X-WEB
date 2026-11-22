@@ -73,3 +73,40 @@ body {
         margin-bottom: 15px;
     }
 }
+
+.cell {
+    position: relative;
+    border: 1px solid #aeb6c2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blue {
+    background: #1769d2;
+}
+
+.red {
+    background: #e53935;
+}
+
+.green {
+    background: #35a853;
+}
+
+.yellow {
+    background: #ffca28;
+}
+
+.path {
+    background: #ffffff;
+}
+
+.empty {
+    background: #ffffff;
+}
+
+.center {
+    background: #f5f5f5;
+    border: 1px solid #aeb6c2;
+}
