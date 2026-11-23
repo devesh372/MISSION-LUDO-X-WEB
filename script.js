@@ -17,7 +17,26 @@ const safeStars = new Set([
     "12,8",
     "8,2"
 ]);
+function isSafeZone(row, col) {
+    const key = `${row},${col}`;
 
+    // Traditional star positions
+    if (safeStars.has(key)) {
+        return true;
+    }
+
+    // Coloured starting blocks
+    if (getStartingColor(row, col)) {
+        return true;
+    }
+
+    // All four coloured home areas
+    if (getHome(row, col)) {
+        return true;
+    }
+
+    return false;
+}
 function getHome(row, col) {
     return players.find(player =>
         row >= player.row &&
