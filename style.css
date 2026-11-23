@@ -7,31 +7,27 @@
 
 body {
     min-height: 100vh;
-    background: radial-gradient(
-        circle at center,
-        #263b65,
-        #10182b 75%
-    );
+    background: radial-gradient(circle, #294b7c, #10182b 80%);
     font-family: Arial, sans-serif;
     color: white;
-    overflow-x: hidden;
 }
 
 #game {
+    width: 100%;
     min-height: 100vh;
+    padding: 15px 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 18px 10px;
 }
 
 .game-header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .game-header h1 {
-    font-size: clamp(25px, 6vw, 40px);
+    font-size: clamp(23px, 6vw, 38px);
     font-weight: 900;
     letter-spacing: 3px;
     color: #ffd54a;
@@ -39,7 +35,7 @@ body {
 }
 
 .game-header p {
-    margin-top: 7px;
+    margin-top: 6px;
     font-size: 10px;
     letter-spacing: 3px;
     color: #c4d5ff;
@@ -47,31 +43,106 @@ body {
 
 #game-screen {
     width: 100%;
+    max-width: 620px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    gap: 5px;
 }
+
+/* PLAYER PANELS */
+
+.player-row {
+    width: min(94vw, 620px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+.player-panel {
+    min-height: 125px;
+    padding: 9px;
+    border: 2px solid #ffffff88;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px #0005;
+}
+
+.player-panel h2 {
+    font-size: clamp(15px, 4vw, 23px);
+    text-align: center;
+    text-shadow: 0 2px 4px #0008;
+}
+
+.red-panel {
+    background: #ed0808;
+}
+
+.green-panel {
+    background: #087c13;
+}
+
+.blue-panel {
+    background: #168edb;
+}
+
+.yellow-panel {
+    background: #e6bd00;
+    color: #222;
+}
+
+.player-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 5px;
+}
+
+.pawn-set {
+    display: grid;
+    grid-template-columns: repeat(2, 27px);
+    gap: 7px;
+}
+
+.pawn-set span {
+    width: 27px;
+    height: 27px;
+    display: grid;
+    place-items: center;
+    background: white;
+    border: 3px solid #333;
+    border-radius: 50%;
+    font-size: 17px;
+    box-shadow: 0 3px 5px #0008;
+}
+
+.red-pawns span { color: #ed0808; }
+.green-pawns span { color: #087c13; }
+.blue-pawns span { color: #168edb; }
+.yellow-pawns span { color: #e6bd00; }
+
+.player-dice {
+    width: 53px;
+    height: 53px;
+    border: 3px solid #e9d36b;
+    border-radius: 10px;
+    background: #f4eeee;
+    font-size: 32px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px #0008;
+}
+
+/* LUDO BOARD */
 
 #ludo-board {
     width: min(94vw, 620px);
     aspect-ratio: 1 / 1;
     background: white;
-    border: 5px solid #d9e0ed;
-    border-radius: 5px;
-    box-shadow:
-        0 15px 45px #0008,
-        0 0 25px #8db7ff55;
+    border: 4px solid #d9e0ed;
+    display: grid;
     overflow: hidden;
-}
-
-@media (max-width: 400px) {
-    #game {
-        padding: 12px 5px;
-    }
-
-    .game-header {
-        margin-bottom: 15px;
-    }
+    box-shadow: 0 12px 30px #0009;
 }
 
 .cell {
@@ -82,36 +153,19 @@ body {
     justify-content: center;
 }
 
-.blue {
-    background: #1769d2;
-}
+.blue { background: #1769d2; }
+.red { background: #e53935; }
+.green { background: #35a853; }
+.yellow { background: #ffca28; }
 
-.red {
-    background: #e53935;
-}
-
-.green {
-    background: #35a853;
-}
-
-.yellow {
-    background: #ffca28;
-}
-
-.path {
-    background: #ffffff;
-}
-
-.empty {
-    background: #ffffff;
+.path, .empty {
+    background: white;
 }
 
 .center {
     background: #f5f5f5;
     border: 1px solid #aeb6c2;
 }
-
-/* HOME BASES */
 
 .home {
     border: 1px solid #333;
@@ -125,10 +179,8 @@ body {
 .home.green { background: #35a853; }
 .home.yellow { background: #ffca28; }
 
-/* PAWN YARDS */
-
 .yard {
-    background: #fff !important;
+    background: white !important;
     border: 2px solid #333;
 }
 
@@ -137,9 +189,8 @@ body {
     height: 75%;
     border-radius: 50%;
     border: 2px solid white;
-    box-shadow:
-        0 3px 5px #0007,
-        inset 0 3px 4px #ffffff88;
+    box-shadow: 0 3px 5px #0007,
+                inset 0 3px 4px #ffffff88;
 }
 
 .pawn.blue { background: #1769d2; }
@@ -147,71 +198,21 @@ body {
 .pawn.green { background: #35a853; }
 .pawn.yellow { background: #ffca28; }
 
-/* HOME LANES */
-
 .lane-blue { background: #1769d2; }
 .lane-red { background: #e53935; }
 .lane-green { background: #35a853; }
 .lane-yellow { background: #ffca28; }
-
-/* FINISH */
 
 .finish {
     color: #e0a900;
     font-size: 20px;
     font-weight: bold;
 }
-/* COLOURED PAWN STARTING CELLS */
 
-.cell.blue {
-    background-color: #1769d2 !important;
-}
-
-.cell.red {
-    background-color: #e53935 !important;
-}
-
-.cell.green {
-    background-color: #35a853 !important;
-}
-
-.cell.yellow {
-    background-color: #ffca28 !important;
-}
-/* GAME CONTROLS */
-
-#game-controls {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-#current-player {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-#dice {
-    font-size: 55px;
-    margin: 10px;
-}
-
-#roll-dice {
-    padding: 12px 30px;
-    border: none;
-    border-radius: 10px;
-    background: #ffd54a;
-    color: #10182b;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#game-message {
-    margin-top: 12px;
-    font-size: 14px;
-}
-/* SAFE ZONE STARS */
+.cell.blue { background-color: #1769d2 !important; }
+.cell.red { background-color: #e53935 !important; }
+.cell.green { background-color: #35a853 !important; }
+.cell.yellow { background-color: #ffca28 !important; }
 
 .safe-star {
     font-size: clamp(12px, 2.5vw, 25px);
@@ -219,4 +220,37 @@ body {
     font-weight: bold;
     line-height: 1;
     pointer-events: none;
+}
+
+/* GAME MESSAGE */
+
+#game-message {
+    min-height: 35px;
+    padding: 10px;
+    text-align: center;
+    font-size: 13px;
+    color: #ffd54a;
+}
+
+@media (max-width: 380px) {
+    .player-panel {
+        min-height: 105px;
+        padding: 5px;
+    }
+
+    .pawn-set {
+        grid-template-columns: repeat(2, 22px);
+        gap: 5px;
+    }
+
+    .pawn-set span {
+        width: 22px;
+        height: 22px;
+    }
+
+    .player-dice {
+        width: 43px;
+        height: 43px;
+        font-size: 26px;
+    }
 }
