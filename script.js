@@ -40,7 +40,16 @@ function isHomeLane(row, col) {
         (col === 7 && row >= 9 && row <= 13)
     );
 }
+function getStartingColor(row, col) {
+    const startingCells = {
+        "6,1": "blue",
+        "1,8": "red",
+        "8,13": "green",
+        "13,6": "yellow"
+    };
 
+    return startingCells[`${row},${col}`];
+}
 function createPawnSlots(home, row, col) {
     const yardRow = row - home.row;
     const yardCol = col - home.col;
