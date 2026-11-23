@@ -10,33 +10,18 @@ const players = [
     { name: "yellow", row: 9, col: 0 }
 ];
 
-// Four traditional safe-zone positions
 const safeStars = new Set([
-    "6,11",
-    "2,6",
-    "12,8",
-    "8,2"
+    "6,11", "2,6", "12,8", "8,2"
 ]);
-function isSafeZone(row, col) {
-    const key = `${row},${col}`;
 
-    // Traditional star positions
-    if (safeStars.has(key)) {
-        return true;
-    }
+let currentPlayerIndex = 0;
+let lastDiceRoll = null;
 
-    // Coloured starting blocks
-    if (getStartingColor(row, col)) {
-        return true;
-    }
+const diceDisplay = document.getElementById("dice");
+const rollButton = document.getElementById("roll-dice");
+const playerDisplay = document.getElementById("current-player");
+const messageDisplay = document.getElementById("game-message");
 
-    // All four coloured home areas
-    if (getHome(row, col)) {
-        return true;
-    }
-
-    return false;
-}
 function getHome(row, col) {
     return players.find(player =>
         row >= player.row &&
@@ -44,6 +29,23 @@ function getHome(row, col) {
         col >= player.col &&
         col < player.col + 6
     );
+}
+
+function getStartingColor(row, col) {
+    const startingCells = {
+        "6,1": "blue",
+        "1,8": "red",
+        "8,13": "green",
+        "13,6": "yellow"
+    };
+
+    return startingCells[`${row},${col}`];
+}
+
+function isSafeZone(row, col) {
+    return safeStars.has(`${row},${col}`) ||
+           Boolean(getStartingColor(row, col)) ||
+           Boolean(getHome(row, col));
 }
 
 function isCenter(row, col) {
@@ -59,16 +61,7 @@ function isHomeLane(row, col) {
         (col === 7 && row >= 9 && row <= 13)
     );
 }
-function getStartingColor(row, col) {
-    const startingCells = {
-        "6,1": "blue",
-        "1,8": "red",
-        "8,13": "green",
-        "13,6": "yellow"
-    };
 
-    return startingCells[`${row},${col}`];
-}
 function createPawnSlots(home, row, col) {
     const yardRow = row - home.row;
     const yardCol = col - home.col;
@@ -97,12 +90,12 @@ function createBoard() {
             cell.className = "cell";
 
             const home = getHome(row, col);
-const startingColor = getStartingColor(row, col);
+            const startingColor = getStartingColor(row, col);
 
-if (startingColor) {
-    cell.classList.add(startingColor);
-}
-            
+            if (startingColor) {
+                cell.classList.add(startingColor);
+            }
+
             if (isCenter(row, col)) {
                 cell.classList.add("center");
 
@@ -128,21 +121,17 @@ if (startingColor) {
             else if (isHomeLane(row, col)) {
                 cell.classList.add("lane");
 
-                if (row === 7 && col <= 5) {
+                if (row === 7 && col <= 5)
                     cell.classList.add("lane-blue");
-                }
 
-                if (col === 7 && row <= 5) {
+                if (col === 7 && row <= 5)
                     cell.classList.add("lane-red");
-                }
 
-                if (row === 7 && col >= 9) {
+                if (row === 7 && col >= 9)
                     cell.classList.add("lane-green");
-                }
 
-                if (col === 7 && row >= 9) {
+                if (col === 7 && row >= 9)
                     cell.classList.add("lane-yellow");
-                }
             }
 
             else if (
@@ -156,7 +145,6 @@ if (startingColor) {
                 cell.classList.add("empty");
             }
 
-            // Add safe-zone stars
             if (safeStars.has(`${row},${col}`)) {
                 const star = document.createElement("span");
                 star.className = "safe-star";
@@ -168,7 +156,34 @@ if (startingColor) {
         }
     }
 
-    console.log("MISSION LUDO X board created with four safe stars!");
+    console.log("MISSION LUDO X board created!");
+}
+
+function rollDice() {
+    const result = Math.floor(Math.random() * 6) + 1;
+
+    lastDiceRoll = result;
+
+    const diceFaces = [
+        "", "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"
+    ];
+
+    diceDisplay.textContent = diceFaces[result];
+
+    const player = players[currentPlayerIndex];
+
+    messageDisplay.textContent =
+        `${player.name.toUpperCase()} rolled ${result}`;
+
+    console.log(`${player.name} rolled ${result}`);
+}
+
+rollButton.addEventListener("click", rollDice);
+
+function updateCurrentPlayer() {
+    playerDisplay.textContent =
+        `${players[currentPlayerIndex].name.toUpperCase()}'s Turn`;
 }
 
 createBoard();
+updateCurrentPlayer();
