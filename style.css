@@ -161,7 +161,23 @@ body {
     font-size: 20px;
     font-weight: bold;
 }
+/* COLOURED PAWN STARTING CELLS */
 
+.cell.blue {
+    background-color: #1769d2 !important;
+}
+
+.cell.red {
+    background-color: #e53935 !important;
+}
+
+.cell.green {
+    background-color: #35a853 !important;
+}
+
+.cell.yellow {
+    background-color: #ffca28 !important;
+}
 /* SAFE ZONE STARS */
 
 .safe-star {
