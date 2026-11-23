@@ -78,7 +78,12 @@ function createBoard() {
             cell.className = "cell";
 
             const home = getHome(row, col);
+const startingColor = getStartingColor(row, col);
 
+if (startingColor) {
+    cell.classList.add(startingColor);
+}
+            
             if (isCenter(row, col)) {
                 cell.classList.add("center");
 
