@@ -178,6 +178,39 @@ body {
 .cell.yellow {
     background-color: #ffca28 !important;
 }
+/* GAME CONTROLS */
+
+#game-controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#current-player {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#dice {
+    font-size: 55px;
+    margin: 10px;
+}
+
+#roll-dice {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    background: #ffd54a;
+    color: #10182b;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#game-message {
+    margin-top: 12px;
+    font-size: 14px;
+}
 /* SAFE ZONE STARS */
 
 .safe-star {
